@@ -37,6 +37,10 @@ body {
   z-index: 20;
 }
 
+/* ==========================
+   MARC
+========================== */
+
 .title {
   position: relative;
 
@@ -49,67 +53,21 @@ body {
 
   color: #fff;
 
-  transition:
-    filter 0.35s ease,
-    text-shadow 0.35s ease;
-
   will-change: transform;
+
+  transition: transform 0.2s ease;
 }
+
+/* Remove chromatic effect from MARC completely */
 
 .title::before,
 .title::after {
-  content: attr(data-text);
-
-  position: absolute;
-  inset: 0;
-
-  pointer-events: none;
-
-  opacity: 0;
-  color: #fff;
-
-  transition:
-    opacity 0.35s ease,
-    transform 0.35s ease,
-    filter 0.35s ease;
+  display: none;
 }
 
-.is-code .title::before {
-  opacity: 0.32;
-  color: rgba(0, 217, 255, 0.75);
-  transform: translate(-3px, 1px);
-  filter: blur(1.5px);
-}
-
-.is-code .title::after {
-  opacity: 0.18;
-  color: rgba(255, 255, 255, 0.6);
-  transform: translate(3px, -1px);
-  filter: blur(1px);
-}
-
-.is-create .title::before {
-  opacity: 0.28;
-  color: rgba(255, 59, 213, 0.75);
-  transform: translate(3px, 1px);
-  filter: blur(1.5px);
-}
-
-.is-create .title::after {
-  opacity: 0.18;
-  color: rgba(255, 241, 118, 0.65);
-  transform: translate(-3px, -1px);
-  filter: blur(1px);
-}
-
-.is-code .title,
-.is-create .title {
-  text-shadow:
-    0 0 24px rgba(255, 255, 255, 0.08),
-    0 0 60px rgba(255, 255, 255, 0.05);
-}
-
-/* CODE / CREATE */
+/* ==========================
+   CODE / CREATE
+========================== */
 
 .selector {
   margin-top: 0.75rem;
@@ -130,7 +88,7 @@ body {
   border: none;
 
   font: inherit;
-  color: inherit;
+  color: rgba(255, 255, 255, 0.9);
 
   cursor: pointer;
 
@@ -140,7 +98,7 @@ body {
     transform 0.3s ease,
     letter-spacing 0.3s ease,
     text-shadow 0.3s ease,
-    opacity 0.3s ease;
+    color 0.3s ease;
 }
 
 .selector button:hover {
@@ -149,12 +107,16 @@ body {
 }
 
 .is-code .selector button:first-child {
+  color: #fff;
+
   text-shadow:
     0 0 12px rgba(0, 217, 255, 0.45),
     0 0 28px rgba(0, 217, 255, 0.25);
 }
 
 .is-create .selector button:last-child {
+  color: #fff;
+
   text-shadow:
     0 0 12px rgba(255, 59, 213, 0.45),
     0 0 28px rgba(255, 59, 213, 0.25);
@@ -164,7 +126,9 @@ body {
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* BACKGROUND WORDS */
+/* ==========================
+   BACKGROUND WORDS
+========================== */
 
 .background-words {
   position: absolute;
@@ -215,7 +179,9 @@ body {
   color: rgba(255, 59, 213, 0.045);
 }
 
-/* FOOTER DETAILS */
+/* ==========================
+   LOCATION
+========================== */
 
 .location {
   position: absolute;
@@ -230,6 +196,10 @@ body {
 
   z-index: 20;
 }
+
+/* ==========================
+   SOCIALS
+========================== */
 
 .socials {
   position: absolute;
@@ -249,6 +219,7 @@ body {
 
 .socials a {
   color: rgba(255, 255, 255, 0.75);
+
   text-decoration: underline;
   text-underline-offset: 0.15em;
 
@@ -268,7 +239,9 @@ body {
     0 0 24px rgba(255, 255, 255, 0.18);
 }
 
-/* RESPONSIVE */
+/* ==========================
+   RESPONSIVE
+========================== */
 
 @media (max-width: 768px) {
   .title {
