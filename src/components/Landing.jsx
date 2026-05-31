@@ -1,27 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { animate } from "animejs";
 
 export default function Landing() {
-  const titleRef = useRef(null);
   const [hovered, setHovered] = useState(null);
-
-  useEffect(() => {
-    animate(titleRef.current, {
-      opacity: [0, 1],
-      translateY: [40, 0],
-      duration: 1200,
-      easing: "easeOutExpo",
-    });
-  }, []);
+  const titleRef = useRef(null);
 
   const handleMouseMove = (e) => {
-    const x = (e.clientX - window.innerWidth / 2) / 80;
-    const y = (e.clientY - window.innerHeight / 2) / 80;
+    if (!titleRef.current) return;
 
-    if (titleRef.current) {
-      titleRef.current.style.transform = `translate(${x}px, ${y}px)`;
-    }
+    const x = (e.clientX - window.innerWidth / 2) / 90;
+    const y = (e.clientY - window.innerHeight / 2) / 120;
+
+    titleRef.current.style.transform = `translate(${x}px, ${y}px)`;
   };
 
   return (
@@ -29,38 +19,32 @@ export default function Landing() {
       className={`landing ${hovered ? `is-${hovered}` : ""}`}
       onMouseMove={handleMouseMove}
     >
-      <div className="grain" />
-      <div className="vignette" />
+      <div className={`background-words ${hovered ? "is-visible" : ""}`}>
+        {hovered === "code" && (
+          <>
+            <span>REACT</span>
+            <span>JAVASCRIPT</span>
+            <span>THREEJS</span>
+            <span>GSAP</span>
+            <span>UX/UI</span>
+          </>
+        )}
 
-      {hovered === "code" && (
-        <div className="background-words">
-          <span>REACT</span>
-          <span>JAVASCRIPT</span>
-          <span>GSAP</span>
-          <span>FRAMER</span>
-          <span>UX/UI</span>
-        </div>
-      )}
-
-      {hovered === "create" && (
-        <div className="background-words">
-          <span>PHOTO</span>
-          <span>FILM</span>
-          <span>EDIT</span>
-          <span>MOTION</span>
-          <span>STORY</span>
-        </div>
-      )}
+        {hovered === "create" && (
+          <>
+            <span>PHOTO</span>
+            <span>FILM</span>
+            <span>MOTION</span>
+            <span>EDIT</span>
+            <span>STORY</span>
+          </>
+        )}
+      </div>
 
       <motion.div
         className="content"
-        animate={{
-          scale: hovered ? 1.02 : 1,
-        }}
-        transition={{
-          duration: 0.6,
-          ease: "easeOut",
-        }}
+        animate={{ scale: hovered ? 1.015 : 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <h1 ref={titleRef} className="title" data-text="MARC">
           MARC
@@ -85,20 +69,12 @@ export default function Landing() {
         </div>
       </motion.div>
 
-      <div className="location">Based in British Columbia.</div>
+      <p className="location">Based in British Columbia.</p>
 
       <div className="socials">
-        <a href="#">
-          <p>Instagram</p>
-        </a>
-
-        <a href="#">
-          <p>LinkedIn</p>
-        </a>
-
-        <a href="#">
-          <p>GitHub</p>
-        </a>
+        <a href="#">instagram</a>
+        <a href="#">linkedin</a>
+        <a href="#">github</a>
       </div>
     </main>
   );

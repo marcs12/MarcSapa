@@ -7,9 +7,9 @@
 }
 
 body {
-  background: white;
+  background: #050509;
   overflow: hidden;
-  color: #000;
+  color: #fff;
 }
 
 #root {
@@ -28,7 +28,8 @@ body {
 
   overflow: hidden;
 
-  color: #000;
+  background: #050509;
+  color: #fff;
 }
 
 .content {
@@ -43,12 +44,14 @@ body {
   font-size: clamp(7rem, 22vw, 18rem);
   font-weight: 900;
 
-  line-height: 0.9;
+  line-height: 0.85;
   letter-spacing: -0.09em;
 
-  color: #000;
+  color: #fff;
 
-  transition: all 0.4s ease;
+  transition:
+    filter 0.35s ease,
+    text-shadow 0.35s ease;
 
   will-change: transform;
 }
@@ -63,81 +66,53 @@ body {
   pointer-events: none;
 
   opacity: 0;
+  color: #fff;
 
-  transition: all 0.35s ease;
-
-  color: #000;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    filter 0.35s ease;
 }
 
-/* ==========================
-   RETRO CHROMATIC ABERRATION
-========================== */
+.is-code .title::before {
+  opacity: 0.32;
+  color: rgba(0, 217, 255, 0.75);
+  transform: translate(-3px, 1px);
+  filter: blur(1.5px);
+}
 
-.is-code .title::before,
+.is-code .title::after {
+  opacity: 0.18;
+  color: rgba(255, 255, 255, 0.6);
+  transform: translate(3px, -1px);
+  filter: blur(1px);
+}
+
 .is-create .title::before {
-  opacity: 0.35;
-
-  color: rgba(255, 60, 60, 0.75);
-
-  filter: blur(2px);
-
-  mix-blend-mode: multiply;
-
-  animation: chromaticDriftRed 3s ease-in-out infinite;
+  opacity: 0.28;
+  color: rgba(255, 59, 213, 0.75);
+  transform: translate(3px, 1px);
+  filter: blur(1.5px);
 }
 
-.is-code .title::after,
 .is-create .title::after {
-  opacity: 0.35;
-
-  color: rgba(0, 180, 255, 0.75);
-
-  filter: blur(2px);
-
-  mix-blend-mode: multiply;
-
-  animation: chromaticDriftBlue 3s ease-in-out infinite;
+  opacity: 0.18;
+  color: rgba(255, 241, 118, 0.65);
+  transform: translate(-3px, -1px);
+  filter: blur(1px);
 }
 
 .is-code .title,
 .is-create .title {
-  filter: contrast(1.03);
+  text-shadow:
+    0 0 24px rgba(255, 255, 255, 0.08),
+    0 0 60px rgba(255, 255, 255, 0.05);
 }
 
-@keyframes chromaticDriftRed {
-  0% {
-    transform: translate(-4px, 1px);
-  }
-
-  50% {
-    transform: translate(-6px, 2px);
-  }
-
-  100% {
-    transform: translate(-4px, 1px);
-  }
-}
-
-@keyframes chromaticDriftBlue {
-  0% {
-    transform: translate(4px, -1px);
-  }
-
-  50% {
-    transform: translate(6px, -2px);
-  }
-
-  100% {
-    transform: translate(4px, -1px);
-  }
-}
-
-/* ==========================
-   CODE / CREATE
-========================== */
+/* CODE / CREATE */
 
 .selector {
-  margin-top: 1rem;
+  margin-top: 0.75rem;
 
   display: flex;
   justify-content: center;
@@ -145,9 +120,9 @@ body {
   gap: 1rem;
 
   font-family: "Castoro", serif;
-  font-size: clamp(1rem, 4vw, 2rem);
+  font-size: clamp(1.25rem, 4vw, 2.25rem);
 
-  color: #000;
+  color: #fff;
 }
 
 .selector button {
@@ -161,7 +136,11 @@ body {
 
   letter-spacing: -0.03em;
 
-  transition: all 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    letter-spacing 0.3s ease,
+    text-shadow 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .selector button:hover {
@@ -169,47 +148,77 @@ body {
   letter-spacing: 0.02em;
 }
 
-.selector span {
-  color: #000;
+.is-code .selector button:first-child {
+  text-shadow:
+    0 0 12px rgba(0, 217, 255, 0.45),
+    0 0 28px rgba(0, 217, 255, 0.25);
 }
 
-/* ==========================
-   BACKGROUND WORDS
-========================== */
+.is-create .selector button:last-child {
+  text-shadow:
+    0 0 12px rgba(255, 59, 213, 0.45),
+    0 0 28px rgba(255, 59, 213, 0.25);
+}
+
+.selector span {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* BACKGROUND WORDS */
 
 .background-words {
   position: absolute;
   inset: 0;
+  z-index: 1;
 
   display: flex;
   justify-content: center;
   align-items: center;
-
   flex-wrap: wrap;
-  gap: 3rem;
 
-  opacity: 0.035;
+  gap: 3rem;
+  padding: 4rem;
 
   pointer-events: none;
 
-  z-index: 1;
+  opacity: 0;
+  transform: scale(1.04);
+
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.background-words.is-visible {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .background-words span {
   font-family: "Inter", sans-serif;
-  font-size: clamp(4rem, 10vw, 12rem);
+  font-size: clamp(3.5rem, 9vw, 12rem);
   font-weight: 900;
+  letter-spacing: -0.08em;
 
-  color: #000;
+  color: rgba(255, 255, 255, 0.045);
+
+  text-shadow:
+    0 0 24px rgba(255, 255, 255, 0.04),
+    0 0 60px rgba(255, 255, 255, 0.03);
 }
 
-/* ==========================
-   LOCATION
-========================== */
+.is-code .background-words span {
+  color: rgba(0, 217, 255, 0.045);
+}
+
+.is-create .background-words span {
+  color: rgba(255, 59, 213, 0.045);
+}
+
+/* FOOTER DETAILS */
 
 .location {
   position: absolute;
-
   left: 1rem;
   bottom: 1rem;
 
@@ -217,14 +226,10 @@ body {
   font-size: 1rem;
   font-weight: 400;
 
-  color: #000;
+  color: rgba(255, 255, 255, 0.75);
 
   z-index: 20;
 }
-
-/* ==========================
-   SOCIALS
-========================== */
 
 .socials {
   position: absolute;
@@ -235,31 +240,56 @@ body {
   display: flex;
   gap: 1.5rem;
 
-  font-size: 2rem;
+  font-family: "Inter", sans-serif;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 400;
 
   z-index: 20;
 }
 
 .socials a {
-  color: #000;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 
-  transition: 0.3s ease;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease,
+    text-shadow 0.3s ease;
 }
 
 .socials a:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
+
+  color: #fff;
+
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.35),
+    0 0 24px rgba(255, 255, 255, 0.18);
 }
 
-/* ==========================
-   VIGNETTE
-========================== */
+/* RESPONSIVE */
 
-.vignette {
-  position: fixed;
-  inset: 0;
+@media (max-width: 768px) {
+  .title {
+    font-size: clamp(5rem, 26vw, 9rem);
+  }
 
-  pointer-events: none;
-  z-index: 90;
+  .selector {
+    margin-top: 0.5rem;
+  }
 
-  background: radial-gradient(circle, transparent 55%, rgba(0, 0, 0, 0.14));
+  .location {
+    font-size: 0.8rem;
+  }
+
+  .socials {
+    gap: 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .background-words {
+    gap: 1rem;
+    padding: 2rem;
+  }
 }
