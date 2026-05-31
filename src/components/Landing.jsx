@@ -12,15 +12,15 @@ export default function Landing() {
   const moveTimeout = useRef(null);
 
   const handleMouseMove = (e) => {
-    const x = (e.clientX - window.innerWidth / 2) / 90;
-    const y = (e.clientY - window.innerHeight / 2) / 120;
+    const x = (e.clientX - window.innerWidth / 2) / 65;
+    const y = (e.clientY - window.innerHeight / 2) / 85;
 
     const transform = `translate(${x}px, ${y}px)`;
 
-    if (whiteRef.current) whiteRef.current.style.transform = transform;
-    if (redRef.current) redRef.current.style.transform = transform;
-    if (greenRef.current) greenRef.current.style.transform = transform;
-    if (blueRef.current) blueRef.current.style.transform = transform;
+    whiteRef.current.style.transform = transform;
+    redRef.current.style.transform = transform;
+    greenRef.current.style.transform = transform;
+    blueRef.current.style.transform = transform;
 
     titleStackRef.current?.classList.add("is-moving");
 
@@ -83,6 +83,7 @@ export default function Landing() {
 
         <div className="selector">
           <button
+            type="button"
             onMouseEnter={() => setHovered("code")}
             onMouseLeave={() => setHovered(null)}
           >
@@ -92,6 +93,7 @@ export default function Landing() {
           <span>/</span>
 
           <button
+            type="button"
             onMouseEnter={() => setHovered("create")}
             onMouseLeave={() => setHovered(null)}
           >
