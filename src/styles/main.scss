@@ -1,0 +1,306 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Castoro:ital@0;1&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #e7e4da;
+  overflow: hidden;
+  color: #000;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+}
+
+.landing {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+
+  background: #e7e4da;
+  color: #000;
+}
+
+.content {
+  text-align: center;
+  z-index: 20;
+}
+
+.title {
+  position: relative;
+
+  font-family: "Inter", sans-serif;
+  font-size: clamp(7rem, 22vw, 18rem);
+  font-weight: 900;
+
+  line-height: 0.9;
+  letter-spacing: -0.09em;
+
+  color: #000;
+
+  transition: all 0.4s ease;
+
+  will-change: transform;
+}
+
+.title::before,
+.title::after {
+  content: attr(data-text);
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  transition: all 0.35s ease;
+
+  color: #000;
+}
+
+/* ==========================
+   RETRO CHROMATIC ABERRATION
+========================== */
+
+.is-code .title::before,
+.is-create .title::before {
+  opacity: 0.35;
+
+  color: rgba(255, 60, 60, 0.75);
+
+  filter: blur(2px);
+
+  mix-blend-mode: multiply;
+
+  animation: chromaticDriftRed 3s ease-in-out infinite;
+}
+
+.is-code .title::after,
+.is-create .title::after {
+  opacity: 0.35;
+
+  color: rgba(0, 180, 255, 0.75);
+
+  filter: blur(2px);
+
+  mix-blend-mode: multiply;
+
+  animation: chromaticDriftBlue 3s ease-in-out infinite;
+}
+
+.is-code .title,
+.is-create .title {
+  filter: contrast(1.03);
+}
+
+@keyframes chromaticDriftRed {
+  0% {
+    transform: translate(-4px, 1px);
+  }
+
+  50% {
+    transform: translate(-6px, 2px);
+  }
+
+  100% {
+    transform: translate(-4px, 1px);
+  }
+}
+
+@keyframes chromaticDriftBlue {
+  0% {
+    transform: translate(4px, -1px);
+  }
+
+  50% {
+    transform: translate(6px, -2px);
+  }
+
+  100% {
+    transform: translate(4px, -1px);
+  }
+}
+
+/* ==========================
+   CODE / CREATE
+========================== */
+
+.selector {
+  margin-top: 1rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  font-family: "Castoro", serif;
+  font-size: clamp(2rem, 4vw, 4rem);
+
+  color: #000;
+}
+
+.selector button {
+  background: none;
+  border: none;
+
+  font: inherit;
+  color: inherit;
+
+  cursor: pointer;
+
+  letter-spacing: -0.03em;
+
+  transition: all 0.3s ease;
+}
+
+.selector button:hover {
+  transform: scale(1.05);
+  letter-spacing: 0.02em;
+}
+
+.selector span {
+  color: #000;
+}
+
+/* ==========================
+   BACKGROUND WORDS
+========================== */
+
+.background-words {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-wrap: wrap;
+  gap: 3rem;
+
+  opacity: 0.035;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+.background-words span {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(4rem, 10vw, 12rem);
+  font-weight: 900;
+
+  color: #000;
+}
+
+/* ==========================
+   LOCATION
+========================== */
+
+.location {
+  position: absolute;
+
+  left: 1rem;
+  bottom: 1rem;
+
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+
+  color: #000;
+
+  z-index: 20;
+}
+
+/* ==========================
+   SOCIALS
+========================== */
+
+.socials {
+  position: absolute;
+
+  right: 1rem;
+  bottom: 1rem;
+
+  display: flex;
+  gap: 1.5rem;
+
+  font-size: 2rem;
+
+  z-index: 20;
+}
+
+.socials a {
+  color: #000;
+
+  transition: 0.3s ease;
+}
+
+.socials a:hover {
+  transform: translateY(-4px);
+}
+
+/* ==========================
+   FILM GRAIN
+========================== */
+
+.grain {
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+  z-index: 100;
+
+  opacity: 0.06;
+
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+
+  animation: grainMove 0.25s steps(4) infinite;
+}
+
+@keyframes grainMove {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(-2%, 2%);
+  }
+
+  50% {
+    transform: translate(2%, -2%);
+  }
+
+  75% {
+    transform: translate(-1%, -1%);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* ==========================
+   VIGNETTE
+========================== */
+
+.vignette {
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+  z-index: 90;
+
+  background: radial-gradient(circle, transparent 55%, rgba(0, 0, 0, 0.14));
+}
