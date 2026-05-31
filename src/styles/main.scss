@@ -33,16 +33,24 @@ body {
 }
 
 .content {
+  position: relative;
   text-align: center;
   z-index: 20;
 }
 
 /* ==========================
-   MARC
+   MARC RGB TRAIL
 ========================== */
 
-.title {
+.title-stack {
   position: relative;
+  width: fit-content;
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+.title {
+  margin: 0;
 
   font-family: "Inter", sans-serif;
   font-size: clamp(7rem, 22vw, 18rem);
@@ -51,18 +59,79 @@ body {
   line-height: 0.85;
   letter-spacing: -0.09em;
 
-  color: #fff;
-
   will-change: transform;
-
-  transition: transform 0.2s ease;
+  pointer-events: none;
 }
 
-/* Remove chromatic effect from MARC completely */
+.title-stack .title:not(.title-white) {
+  position: absolute;
+  inset: 0;
+}
 
-.title::before,
-.title::after {
-  display: none;
+.title-white {
+  position: relative;
+  z-index: 10;
+
+  color: #fff;
+
+  transition: transform 0.08s linear;
+}
+
+.title-red {
+  z-index: 7;
+
+  color: #ff0048;
+  opacity: 0;
+
+  text-shadow:
+    0 0 8px rgba(255, 0, 72, 0.6),
+    0 0 20px rgba(255, 0, 72, 0.25);
+
+  transition:
+    transform 0.18s ease-out,
+    opacity 0.15s ease;
+}
+
+.title-green {
+  z-index: 6;
+
+  color: #00ff88;
+  opacity: 0;
+
+  text-shadow:
+    0 0 8px rgba(0, 255, 136, 0.5),
+    0 0 20px rgba(0, 255, 136, 0.2);
+
+  transition:
+    transform 0.26s ease-out,
+    opacity 0.15s ease;
+}
+
+.title-blue {
+  z-index: 5;
+
+  color: #00d9ff;
+  opacity: 0;
+
+  text-shadow:
+    0 0 8px rgba(0, 217, 255, 0.6),
+    0 0 20px rgba(0, 217, 255, 0.25);
+
+  transition:
+    transform 0.34s ease-out,
+    opacity 0.15s ease;
+}
+
+.title-stack.is-moving .title-red {
+  opacity: 0.42;
+}
+
+.title-stack.is-moving .title-green {
+  opacity: 0.32;
+}
+
+.title-stack.is-moving .title-blue {
+  opacity: 0.36;
 }
 
 /* ==========================
@@ -70,6 +139,9 @@ body {
 ========================== */
 
 .selector {
+  position: relative;
+  z-index: 100;
+
   margin-top: 0.75rem;
 
   display: flex;
