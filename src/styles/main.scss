@@ -358,3 +358,19 @@ body {
     padding: 2rem;
   }
 }
+
+#vanta-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.content {
+  z-index: 20;
+}
+
+.background-words {
+  z-index: 1;
+}

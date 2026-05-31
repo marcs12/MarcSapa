@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 export default function Landing() {
   const [hovered, setHovered] = useState(null);
@@ -10,6 +10,32 @@ export default function Landing() {
   const greenRef = useRef(null);
   const blueRef = useRef(null);
   const moveTimeout = useRef(null);
+  const vantaEffect = useRef(null);
+
+  useEffect(() => {
+    if (!vantaEffect.current && window.VANTA) {
+      vantaEffect.current = window.VANTA.CELLS({
+        el: "#vanta-bg",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200,
+        minWidth: 200,
+        scale: 1,
+        color1: 0x000000,
+        color2: 0x111111,
+        size: 0.3,
+        speed: 1.2,
+      });
+    }
+
+    return () => {
+      if (vantaEffect.current) {
+        vantaEffect.current.destroy();
+        vantaEffect.current = null;
+      }
+    };
+  }, []);
 
   const handleMouseMove = (e) => {
     const x = (e.clientX - window.innerWidth / 2) / 65;
